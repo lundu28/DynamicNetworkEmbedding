@@ -1,0 +1,73 @@
+{
+    "num_nodes": 558,
+    "init":{
+        "func": "dne_init",
+        "load_data": {
+            "func": "load_unweighted_digraph",
+            "is_directed": false,
+            "network_file": "amherst_558_0.25_nw_init"
+        },
+        "init_train":{
+            "negative_sampling_distribution":{
+                "func": "out_degree_distribution"
+            },
+            "batch_strategy":{
+                "func": "weighted_edges_sampling"
+            },
+            "func": "line",
+            "num_nodes": 558,
+            "batch_size": 100,
+            "learn_rate": 0.003,
+            "embedding_size": 20,
+            "loss_func": "cross_entropy",
+            "optimizer": "AdamOptimizer",
+            "neighbor_size": 1,
+             "num_sampled": 4,
+             "negative_distortion": 1.0,
+             "iteration_num": 30001
+        }
+    },
+    "main_loop":{
+        "func": "dne_loop",
+        "get_next": {
+            "func": "unweighted_get",
+            "input_file": "amherst_558_0.25_nw_dynamic",
+            "is_directed": false,
+            "num_new_nodes":200
+        },
+        "dynamic_embedding":{
+            "batch_strategy":{
+                "func": "enhance_joint_sampling"
+            },
+            "in_negative_sampling_distribution":{
+                "func": "in_degree_distribution"
+            },
+            "out_negative_sampling_distribution":{
+                "func": "out_degree_distribution"
+            },
+            "num_modify": 10,
+            "func": "joint_optimize",
+            "batch_size": 300,
+            "learn_rate": 0.003,
+            "optimizer": "AdamOptimizer",
+            "neighbor_size": 1,
+            "num_sampled": 4,
+            "lambda": 0.001,
+            "negative_distortion": 1.0,
+            "iteration_num": 10001
+        }
+    },
+    "metrics":[
+        {
+            "func": "classification",
+            "classification":{
+                "func": "logistic",
+                "n_jobs": 2
+            },
+            "ground_truth": "amherst_flag.dat",
+            "test_size": 0.3,
+            "times": 4
+        }
+    ]
+
+}
