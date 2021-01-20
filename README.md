@@ -1,5 +1,5 @@
 ## Dynamic Network Embedding: An Extended Approach for Skip-gram based Network Embedding
-#### Authors: Lun Du, YunWang, Guojie Songy, Zhicong Lu, Junshan Wang
+#### Authors: Lun Du, Yun Wang, Guojie Song, Zhicong Lu, Junshan Wang
 - We provide a tensorflow-based implementation on Linux systems
 ## How to use
 - We support a default environment with anaconda:
